@@ -13,25 +13,18 @@ import android.provider.MediaStore
 import android.provider.Settings
 import android.util.Log
 import android.widget.Toast
-import androidx.annotation.RequiresApi
 import androidx.appcompat.app.AlertDialog
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.app.ActivityCompat
-import androidx.core.content.ContentProviderCompat.requireContext
 import androidx.core.content.ContextCompat
-import androidx.core.content.FileProvider
 import kotlinx.android.synthetic.main.activity_main.*
-import kotlinx.android.synthetic.main.activity_main.view.*
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
 import java.io.File
-import java.io.IOException
 import java.net.URL
-import java.text.SimpleDateFormat
 import java.util.*
-
 
 class MainActivity : AppCompatActivity() {
     private var bitmap:Bitmap?=null
@@ -43,8 +36,6 @@ class MainActivity : AppCompatActivity() {
         private const val MY_PERMISSIONS_REQUEST_GALLERY=2
         private const val TAG="MainActivity"
         private const val IMAGE_URL="https://static.dw.com/image/59891785_403.jpg"
-        private const val IMAGE_DIRECTORY_NAME="Hello Camera"
-        private const val FILE_PROVIDER_AUTHORITY="com.example.android.fileprovider"
     }
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -133,23 +124,6 @@ class MainActivity : AppCompatActivity() {
                 }
             }
         }
-    }
-
-    // Returns the File for a photo stored on disk given the fileName
-    fun getPhotoFileUri(fileName: String): File {
-        // Get safe storage directory for photos
-        // Use `getExternalFilesDir` on Context to access package-specific directories.
-        // This way, we don't need to request external read/write runtime permissions.
-        val mediaStorageDir =
-            File(getExternalFilesDir(Environment.DIRECTORY_PICTURES), TAG)
-
-        // Create the storage directory if it does not exist
-        if (!mediaStorageDir.exists() && !mediaStorageDir.mkdirs()) {
-            Log.d(TAG, "failed to create directory")
-        }
-
-        // Return the file target for the photo based on filename
-        return File(mediaStorageDir.path + File.separator + fileName)
     }
 
     //Check call permission

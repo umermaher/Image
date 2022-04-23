@@ -1,0 +1,5 @@
+<resources>
+    <string name="app_name">Work with Image</string>
+    <string name="error">Image could not deleted!</string>
+    <string name="file_provider_authorities">com.example.workwithimage</string>
+</resources>
